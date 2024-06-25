@@ -1,0 +1,196 @@
+第一列不重复值数量：190
+第二列不重复值数量：306
+两列合并后不重复值数量：322
+
+第一列中重复次数最多的前十个内容和对应的关系发生次数：
+Caller
+map                     75795530
+ee.Image                45991318
+ee.ImageCollection      41037496
+ee.Number               35374365
+ee.FeatureCollection    32862639
+ee.List                 31125789
+ee.Feature              29437334
+set                     29247731
+addBands                28315983
+add                     26159024
+
+第二列中重复次数最多的前十个内容和对应的关系发生次数：
+API
+get          27906705
+ee.Number    25607001
+select       19445223
+ee.Image     18724224
+multiply     16599480
+first        16596032
+add          16476463
+geometry     16135202
+subtract     16038829
+ee.List      15296606
+
+两列合并时重复次数最多的前十个内容和对应的关系发生次数：
+Caller
+map                     84344421
+ee.Image                64715542
+ee.Number               60981366
+ee.ImageCollection      48897177
+ee.List                 46422395
+add                     42635487
+ee.FeatureCollection    41093243
+ee.Feature              40392760
+get                     35958023
+set                     34701472
+
+只出现在第一列中而没有出现在第二列中的内容和对应的关系发生次数：
+Caller
+arrayDotProduct                  241716
+arraySort                        557886
+bitwiseXor                       244686
+coveringGrid                     229170
+directionalDistanceTransform     112344
+displace                         281696
+ee.ConfusionMatrix               924603
+getFilmstripThumbURL              44818
+getMap                           739408
+getThumbURL                      662367
+getVideoThumbURL                 382200
+initialize                       124622
+inverseDistance                 1045536
+reset                             20788
+rightShift                         7276
+sampleRectangle                  158370
+
+只出现在第二列中而没有出现在第一列中的内容和对应的关系发生次数：
+API
+accum                            221352
+accuracy                        1906371
+aggregate_array                 4718924
+aggregate_count                  513360
+aggregate_count_distinct         243896
+aggregate_first                 1160796
+aggregate_histogram              754570
+aggregate_max                   1542737
+aggregate_mean                  2034435
+aggregate_min                   1501890
+aggregate_sample_sd              408513
+aggregate_stats                  287026
+aggregate_total_sd               173408
+aggregate_total_var              185283
+argmax                           955914
+arrayAccum                        98094
+arrayArgmax                      228566
+arrayLength                     1245574
+arrayLengths                     418302
+arrayPad                         187108
+arrayProject                     941333
+arrayReduce                      120550
+arrayTranspose                   215918
+bandNames                       9611747
+bitCount                         289564
+byte                             537763
+cluster                          600462
+consumersAccuracy               1040886
+convexHull                       436004
+coordinates                     3768685
+count                            700638
+cut                              296010
+date                            7680074
+decodeJSON                       284496
+dissolve                         898490
+double                           435156
+ee.ErrorMargin                  5215776
+ee.PixelType                     436701
+end                             2132478
+entropy                           26158
+erfcInv                          259842
+first                          16596032
+flatten                         3115490
+float                           1972129
+focalMean                        110486
+focalMedian                      283644
+focalMin                          89370
+focalMode                        110486
+frequency                        505934
+fscore                           251030
+gamma                            397998
+geometries                      1586675
+getArray                         601941
+getFraction                      860639
+getGeometry                      532154
+getRange                         715459
+getRelative                     2815111
+gradient                          83932
+hypot                            199260
+id                              3722092
+index                            449386
+indexOfSublist                    43262
+int                             3694412
+int16                            750350
+int8                             654214
+join                            1498258
+kappa                           1510782
+leftShift                        111468
+log10                           1317562
+long                             256438
+matrixCholeskyDecomposition      238688
+matrixInverse                    238688
+matrixPseudoInverse              783770
+matrixTranspose                  989498
+mean                            3353498
+median                          3107682
+millis                          4704938
+mode                             160976
+mosaic                          3002478
+neighborhoodToArray              246718
+nominalScale                    1679343
+not                             4084069
+order                             99915
+pad                              245152
+perimeter                       1057600
+pixelArea                          2922
+producersAccuracy               1298016
+product                          184022
+project                          430534
+projection                      7943086
+propertyNames                   3882521
+qualityMosaic                   1491569
+random                          1954703
+randomVisualizer                 278236
+reduceConnectedComponents        252630
+reduceResolution                 504774
+register                          34446
+resample                        1589480
+reverse                         1108546
+rgbToHsv                         179278
+rindex                           610042
+rotate                           540152
+selfMask                        2204645
+short                            257246
+sin                             3306820
+size                           11493605
+sldStyle                         437352
+start                           2785045
+sum                             3666634
+toBands                         2034717
+toByte                           795002
+toDouble                         916948
+toFloat                         1997718
+toGeoJSONString                  262104
+toInt                           2273508
+toInt16                         1014915
+toInt32                          582538
+toInt64                          140248
+toInt8                           757276
+toLowerCase                      382252
+toShort                          450960
+toUint16                         269242
+toUint32                         140248
+toUint8                          599216
+toUpperCase                      688886
+transpose                       2282857
+trim                             283283
+type                             108606
+uint16                           805945
+uint8                            518962
+unmix                            425678
+unzip                            224552

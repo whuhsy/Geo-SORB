@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Relationships</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        body { 
+            margin: 0; 
+            position: fixed; 
+            top: 0; 
+            right: 0; 
+            bottom: 0; 
+            left: 0; 
+        }
+        .labels {
+            font-family: Arial, sans-serif;
+            font-size: 14px; /* Decreased font size for visibility */
+            pointer-events: none;
+            fill: white; /* Changed label color to white */
+            font-weight: bold; /* Added bold font weight */
+        }
+        line {
+            stroke-opacity: 0.7; /* Increased stroke opacity */
+        }
+    </style>
+</head>
+<body>
+    <svg></svg>
+    <script>
+        d3.json("17_Output_total.json").then(function(json_data) {
+            const svg = d3.select("svg")
+                .attr("width", window.innerWidth)
+                .attr("height", window.innerHeight);
+
+            const simulation = d3.forceSimulation(json_data.nodes)
+                .force("link", d3.forceLink(json_data.links).id(d => d.id).distance(80)) // 调整边的长度
+                .force("charge", d3.forceManyBody().strength(-800))
+                .force("center", d3.forceCenter(window.innerWidth/2, window.innerHeight/2));
+
+            const link = svg.append("g")
+                .selectAll("line")
+                .data(json_data.links)
+                .join("line")
+                .style("stroke-width", d => d.strength / 120000) // Adjusted stroke width
+                .style("stroke", d => {
+                    switch (d.type) {
+                        case "nested": return "rgba(26, 104, 64, 0.9)"; // Green with higher opacity
+                        case "parallel": return "rgba(20, 74, 116, 0.9)"; // Blue with higher opacity
+                        case "sequential": return "rgba(124, 24, 35, 0.9)"; // REd with higher opacity
+                        case "Total": return "rgba(252, 161, 6, 0.9)"; // REd with higher opacity
+                    }
+                })
+                .on("mouseover", (event, d) => {
+                    tooltip.text(`Counts: ${d.strength}`);
+                    tooltip.style("visibility", "visible");
+                })
+                .on("mousemove", (event) => {
+                    tooltip.style("top", (event.pageY - 10) + "px")
+                        .style("left", (event.pageX + 10) + "px");
+                })
+                .on("mouseout", () => {
+                    tooltip.style("visibility", "hidden");
+                });
+
+            const node = svg.append("g")
+                .selectAll("circle")
+                .data(json_data.nodes)
+                .join("circle")
+                .attr("r", 30) // 将节点大小调整为更大
+                .attr("fill", "rgb(18, 39, 79)")
+                .call(drag(simulation))
+                .on("mouseover", (event, d) => {
+                    tooltip.text(d.id);
+                    tooltip.style("visibility", "visible");
+                })
+                .on("mousemove", (event) => {
+                    tooltip.style("top", (event.pageY - 10) + "px")
+                        .style("left", (event.pageX + 10) + "px");
+                })
+                .on("mouseout", () => {
+                    tooltip.style("visibility", "hidden");
+                });
+
+            const labels = svg.append("g")
+                .attr("class", "labels")
+                .selectAll("text")
+                .data(json_data.nodes)
+                .enter().append("text")
+                .attr("text-anchor", "middle")
+                .text(d => d.id);
+
+            const tooltip = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("position", "absolute")
+                .style("z-index", "10")
+                .style("visibility", "hidden")
+                .style("background-color", "rgba(0, 0, 0, 0.7)")
+                .style("color", "white")
+                .style("padding", "5px")
+                .style("border-radius", "5px");
+
+            function drag(simulation) {
+                function dragstarted(event) {
+                    if (!event.active) simulation.alphaTarget(0.3).restart();
+                    event.subject.fx = event.subject.x;
+                    event.subject.fy = event.subject.y;
+                }
+
+                function dragged(event) {
+                    event.subject.fx = event.x;
+                    event.subject.fy = event.y;
+                }
+
+                function dragended(event) {
+                    if (!event.active) simulation.alphaTarget(0);
+                    event.subject.fx = null;
+                    event.subject.fy = null;
+                }
+
+                return d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended);
+            }
+
+            simulation.on("tick", () => {
+                link
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+
+                node
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+
+                labels
+                    .attr("x", d => d.x)
+                    .attr("y", d => d.y + 5); // Adjust label position for better visibility
+            });
+        });
+    </script>
+</body>
+</html>
